@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi - CaTea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .register-container { 
+            max-width: 500px; 
+            margin: 50px auto; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">CaTea 🍵</a>
+            <a href="index.html" class="btn btn-outline-secondary btn-sm">Kembali ke Beranda</a>
+        </div>
+    </nav>
+
+    <div class="container register-container">
+        <div class="card p-4 shadow">
+            <h3 class="text-center mb-4">Daftar Member Baru</h3>
+            
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="regNama" required placeholder="Contoh: Luki Solihin">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Alamat Email</label>
+                    <input type="email" class="form-control" id="regEmail" required placeholder="nama@email.com">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" id="regUser" required placeholder="Buat username unik">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="regPass" required>
+                </div>
+
+                <button type="submit" class="btn btn-catea w-100">Daftar Sekarang</button>
+            </form>
+
+            <hr class="my-4">
+            <p class="text-center mb-0">Sudah punya akun? <a href="login.html" class="fw-bold text-decoration-none" style="color: #6b4f4f;">Login disini</a></p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container text-center py-4">
+            <p class="mb-0">@Copyright by 23552011413_Luki Solihin_23 CNS B</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Mencegah halaman refresh otomatis
+            
+            // 1. Ambil nilai dari input berdasarkan ID yang benar
+            const namaVal = document.getElementById('regNama').value;
+            const emailVal = document.getElementById('regEmail').value;
+            const userVal = document.getElementById('regUser').value;
+            const passVal = document.getElementById('regPass').value;
+
+            console.log("Mencoba mengirim data:", { namaVal, userVal }); // Cek di Console Browser
+
+            // 2. Kirim ke API Server
+            try {
+                const response = await fetch('http://localhost:3000/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        nama: namaVal, 
+                        email: emailVal, 
+                        username: userVal, 
+                        password: passVal 
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Registrasi BERHASIL! Data sudah masuk database.");
+                    window.location.href = 'login.html';
+                } else {
+                    alert("Gagal: " + result.message);
+                }
+            } catch (error) {
+                console.error('Error Fetch:', error);
+                alert('Gagal menghubungi server. Pastikan "node server.js" menyala!');
+            }
+        });
+    </script>
+</body>
+</html>

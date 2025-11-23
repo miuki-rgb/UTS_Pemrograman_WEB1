@@ -1,0 +1,44 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #fdfbf7; /* Warna krem sangat muda */
+    color: #5d5d5d;
+}
+
+h1, h2, h3, h4, .navbar-brand {
+    font-family: 'Playfair Display', serif;
+    color: #6b4f4f; /* Coklat elegan */
+}
+
+.btn-catea {
+    background-color: #bcaaa4;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 25px;
+}
+
+.btn-catea:hover {
+    background-color: #8c7b75;
+    color: white;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer sesuai soal */
+footer {
+    background-color: #6b4f4f;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+}
